@@ -1,13 +1,3 @@
-let inputDate = document.querySelector('#date-input');
-
-let dateBtn = document.querySelector('#datebtn');
-
-let outputMsg = document.querySelector('#output-palindrome');
-
-
-
-
-
 
 function reverseStr(str){
     let charList = str.split('');
@@ -166,5 +156,39 @@ function nextPalindromeArrive(date){
     return [count, dateArrival];
 }
 
+let inputDate = document.querySelector('#date-input');
+
+let dateBtn = document.querySelector('#datebtn');
+
+let outputMsg = document.querySelector('#output-palindrome');
+
+function clickHandler(){
+    let birthDate = inputDate.value;
+    
+        if(birthDate !== ''){
+            let separatingDate = birthDate.split('-');
+            let date = {
+                day : Number(separatingDate[2]),
+                month : Number(separatingDate[1]),
+                year : Number(separatingDate[0])
+            }
+
+            let isPalindrome = checkPalindromeForAllDates(date);
+                if(isPalindrome){   
+                    outputMsg.innerText = "WOOHOOOO!!!! YOUR BIRTHDAY IS A PALINDROME.";
+                }else{
+                    let [count, dateArrival] = nextPalindromeArrive(date);
+                    let nextPalindrome = Object.values(dateArrival);
+                    
+                    outputMsg.innerText = "The next palindrome arrives will be " + nextPalindrome[0]+'-'+nextPalindrome[1]+'-'+nextPalindrome[2]+ " after "+ count+ " days";
+                }
+        }
+
+        
+
+}
 
 
+
+
+dateBtn.addEventListener('click', clickHandler);
